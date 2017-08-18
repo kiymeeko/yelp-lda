@@ -1,0 +1,8 @@
+Stopwords: ["pizza", "good", "crust", "one", "berkeley", "good", "place", "get", \
+"also", "pretty", "would", "really", "food", "ive", "like", "great", "\xa0the", "little", "also",\
+"best", "restaurant", "definitely", "always", "get", "us", "got", "dont",\
+"two", "top", "want", "hot", "toss", "try", "came", "im", "love", "super", "youre", "bay" \
+"delicious", "favorite", "come", "nice", "didnt", "much", "find", "even"]
+NumTopics: 7
+Restaurant: All
+[(0, u'0.020*"sauce" + 0.016*"cheese" + 0.011*"day" + 0.008*"time" + 0.008*"still" + 0.007*"fresh" + 0.007*"slice" + 0.007*"waiting" + 0.006*"pizzas" + 0.006*"line"'), (1, u'0.014*"dish" + 0.013*"ordered" + 0.012*"\xa0the" + 0.009*"fried" + 0.009*"chicken" + 0.009*"\xa0i" + 0.008*"salad" + 0.007*"beef" + 0.007*"duck" + 0.007*"back"'), (2, u'0.014*"order" + 0.012*"quality" + 0.011*"time" + 0.008*"service" + 0.007*"fresh" + 0.007*"delicious" + 0.007*"night" + 0.007*"tacos" + 0.007*"experience" + 0.006*"taco"'), (3, u'0.033*"thai" + 0.014*"pad" + 0.011*"go" + 0.011*"places" + 0.010*"rice" + 0.009*"service" + 0.008*"flavor" + 0.007*"friendly" + 0.007*"times" + 0.007*"burgers"'), (4, u'0.011*"delicious" + 0.009*"cakes" + 0.009*"wait" + 0.008*"cream" + 0.007*"time" + 0.007*"brunch" + 0.007*"worth" + 0.007*"service" + 0.006*"breakfast" + 0.006*"around"'), (5, u'0.028*"chicken" + 0.016*"rice" + 0.012*"noodles" + 0.012*"dishes" + 0.011*"noodle" + 0.010*"curry" + 0.009*"menu" + 0.008*"plate" + 0.007*"delicious" + 0.007*"beef"'), (6, u'0.023*"cake" + 0.012*"sweet" + 0.010*"well" + 0.009*"burger" + 0.009*"flavor" + 0.008*"fried" + 0.007*"loved" + 0.007*"fries" + 0.007*"crispy" + 0.006*"ordered"')]
