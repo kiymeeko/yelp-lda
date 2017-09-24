@@ -26,9 +26,9 @@ def topicsGenerator(links):
     for link in links:
         sketch = link.split('/')
         fileName = sketch[-1]
-        topicDetector(fileName, gensim.models.LdaModel.load('lda.model'))
+        topicDetector(fileName, gensim.models.LdaModel.load('./ldaModel/lda.model'))
 
-links = webscraper.getWebsites('https://www.yelp.com/search?find_desc=food&find_loc=Berkeley,+CA,+US&start=0&sortby=review_count', 4)
+#links = webscraper.getWebsites('https://www.yelp.com/search?find_desc=food&find_loc=Berkeley,+CA,+US&start=0&sortby=review_count', 4)
 
 #topicsGenerator(links)
-#topicDetector("cheese-board-pizza-berkeley?osq=food", gensim.models.LdaModel.load('lda.model'))
+topicDetector("cheese-board-pizza-berkeley?osq=food", gensim.models.LdaModel.load('./ldaModel/lda.model'))
