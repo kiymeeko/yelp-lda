@@ -31,5 +31,3 @@ def getWebsites(link, page_num):
         links.extend(website_link)
         link = link.replace('start=' + str((i - 1) * 10), 'start=' + str(i * 10))
     return links;
-
-links = getWebsites('https://www.yelp.com/search?find_desc=food&find_loc=Berkeley,+CA,+US&start=0&sortby=review_count', 4)

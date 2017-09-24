@@ -5,9 +5,6 @@ import string
 from nltk.corpus import stopwords
 import gensim
 from gensim import corpora
-from sklearn.feature_extraction.text import CountVectorizer, TfidfVectorizer
-from sklearn.decomposition import LatentDirichletAllocation as LDA
-from sklearn.decomposition import PCA
 import matplotlib.pyplot as plt
 import matplotlib.patches as mpatches
 import numpy as np
@@ -20,6 +17,7 @@ from gensim import corpora, models, similarities
 links = webscraper.getWebsites('https://www.yelp.com/search?find_desc=food&find_loc=Berkeley,+CA,+US&start=0&sortby=review_count', 4)
 
 stop_words = [word.encode('utf-8') for word in stopwords.words('english')]
+
 stop_words.extend(["pizza", "good", "crust", "one", "berkeley", "good", "place", "get", \
 "also", "pretty", "would", "really", "food", "ive", "well", "loved", "dish", "\xa0the", \
 "\xa0i", "experience", "still"])
@@ -30,6 +28,23 @@ stop_words.extend(["pizza", "good", "crust", "one", "berkeley", "good", "place",
 "delicious", "favorite", "come", "nice", "didnt", "much", "find", "even", "cheese", \
 "give", "amazing", "next", "probably", "amazing", "enjoy", "slice", "slices", "sauce", "day", \
 "go"])"""
+
+def createCorpusForWebsite(link):
+    file_list = []
+    sketch = link.split('/')
+    fileName = './data/filtered/' + 'filtered' + sketch[-1] + '.csv'
+    with open(fileName, 'r') as content_file:
+        reviews = content_file.read().split('\n')
+        file_list.extend([review.split(' ') for review in reviews]);
+    dictionary = corpora.Dictionary(file_list)
+    doc_term_matrix = [dictionary.doc2bow(doc) for doc in file_list]
+    with open('./corpus/' + sketch[-1], 'w') as outFile:
+        outFile.write(str(doc_term_matrix))
+
+#result, corpus = lda(links, "All", 7)
+def createCorpusForGroup(links):
+    for link in links:
+        createCorpusForWebsite(link)
 
 def ridExtraWords(links):
     for link in links:
@@ -80,50 +95,4 @@ def lda(links, rest, num):
     #return ldamodel
     return ldamodel, matrix
 
-def assignTopics(vec, corpus):
-    ltfidf = models.TfidfModel(corpus)
-    index = similarities.SparseMatrixSimilarity(tfidf[corpus], num_features=12)
-    sims = index[tfidf[vec]]
-    print(list(enumerate(sims)))
-
-def topicDetector(file_name, ldamodel):
-    with open('./corpus/' + file_name, 'r') as content_file:
-        corpus = eval(content_file.read())
-        for i in range(len(corpus)):
-            print "Review " + str(i)
-            topicSims = []
-            for topic, sim in ldamodel.get_document_topics(corpus[i]):
-                if (sim > 0.2):
-                    topicSims += [(topic, sim)]
-            with open('./topicSims/' + file_name, 'a') as outFile:
-                outFile.write(str(topicSims))
-                outFile.write('\n')
-
-def createCorpusForWebsite(link):
-    file_list = []
-    sketch = link.split('/')
-    fileName = './data/filtered/' + 'filtered' + sketch[-1] + '.csv'
-    with open(fileName, 'r') as content_file:
-        reviews = content_file.read().split('\n')
-        file_list.extend([review.split(' ') for review in reviews]);
-    dictionary = corpora.Dictionary(file_list)
-    doc_term_matrix = [dictionary.doc2bow(doc) for doc in file_list]
-    with open('./corpus/' + sketch[-1], 'w') as outFile:
-        outFile.write(str(doc_term_matrix))
-
-#result, corpus = lda(links, "All", 7)
-def createCorpusForGroup(links):
-    for link in links:
-        createCorpusForWebsite(link)
-
-def topicsGenerator(links):
-    for link in links:
-        sketch = link.split('/')
-        fileName = sketch[-1]
-        topicDetector(fileName, gensim.models.LdaModel.load('lda.model'))
-#topicsGenerator(links)
-#topicDetector("cheese-board-pizza-berkeley?osq=food", gensim.models.LdaModel.load('lda.model'))
-
 #result = lda(links, "All", 7)
-#print(result.print_topics(num_topics = 4, num_words = 10))
-#http://scikit-learn.org/stable/auto_examples/applications/topics_extraction_with_nmf_lda.html
